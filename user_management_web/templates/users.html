@@ -8,11 +8,26 @@
 
 <h1>Users listed here</h1>
 <ul>
-     {% for user in users %}
-      <li>
-       {{ user.username }} ({{ user.email }})
-      </li>
-     {% endfor %}
-    </ul>
+
+    {% for user, permissions in result %}
+        <li>
+            {{ user.username }} {% if user.email %}({{ user.email }}) {% endif %}
+            {% if user.is_superuser %}
+                <p>User has all permissions</p>
+            {% else %}
+                {% for permission in all_permissions %}
+                    <div>
+                        {% if permission in permissions %}
+                            <span>☑</span>
+                        {% else %}
+                            <span>☐</span>
+                        {% endif %}
+                        {{ permission }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
 </body>
 </html>
