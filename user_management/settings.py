@@ -129,6 +129,9 @@ class Common(Configuration):
 
     STATICFILE_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+    LOGIN_URL = '/web/login'
+    LOGIN_REDIRECT_URL = 'users'
+
 
 class Development(Common):
     DEBUG = True
