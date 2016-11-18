@@ -1,0 +1,18 @@
+{% load permission_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User management | Recruitment Page</title>
+</head>
+<body>
+<h1>This page is visible only for recruiters and lead recruiters</h1>
+<h3>Your role is:
+    {% if user|has_role:'lead_recruiter' %}
+        Lead recruiter
+    {% elif user|has_role:'recruiter' %}
+        Recruiter
+    {% endif %}
+</h3>
+</body>
+</html>

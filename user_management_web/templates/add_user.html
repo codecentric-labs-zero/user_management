@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User management | AddUsers</title>
+</head>
+<body>
+<a href="/web/logout">logout</a>
+<br>
+<a href="/web/users">back</a>
+
+<h1>Add user</h1>
+
+<form action="/web/add_user" method="post">
+    {% csrf_token %}
+    Username:<br>
+    <input type="text" name="username" value="">
+    <br>
+    Password:<br>
+    <input type="text" name="password" value="">
+    <br>
+    <br>
+    <input type="submit" value="Add user">
+</form>
+
+</body>
+</html>

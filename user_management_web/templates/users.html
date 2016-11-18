@@ -4,8 +4,9 @@
     <title>User management | Users</title>
 </head>
 <body>
-<a href="/web/logout">logout</a>
-
+<a href="/web/logout">logout ({{ user.get_username }})</a>
+<br>
+<a href="/web/add_user">Add user</a>
 <h1>Users listed here</h1>
 <ul>
 

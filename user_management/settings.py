@@ -27,6 +27,8 @@ class Common(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'django_extensions',
+        'rest_framework',
+        'rolepermissions',
         'waffle',
         'user_management_api',
         'user_management_web'
@@ -131,6 +133,8 @@ class Common(Configuration):
 
     LOGIN_URL = '/web/login'
     LOGIN_REDIRECT_URL = 'users'
+
+    ROLEPERMISSIONS_MODULE = 'user_management.roles'
 
 
 class Development(Common):
