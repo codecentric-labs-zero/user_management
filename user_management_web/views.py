@@ -41,9 +41,9 @@ def users(request):
     result = []
     for user in User.objects.all():
         if get_user_role(user) is None:
-            result.append((user, None))
+            result.append((user, None, None))
         else:
-            result.append((user, available_perm_status(user)))
+            result.append((user, get_user_role(user), available_perm_status(user)))
     return render(request, 'users.html', {'result': result})
 
 

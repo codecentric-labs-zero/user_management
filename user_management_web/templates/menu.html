@@ -11,7 +11,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-                <li><a>{{ user.get_username }} ({{ user }})({{ user|has_role:'lead_recruiter' }})</a></li>
+                <li><a>{{ user.get_username }}</a></li>
+                <li><a>Role: {{ user.profile.get_role }}</a></li>
                 <li><a href="/web/logout">logout</a></li>
             {% else %}
                 <li><a href="/web/login">Log in</a></li>
