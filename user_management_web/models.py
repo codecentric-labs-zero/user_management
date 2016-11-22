@@ -9,6 +9,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def get_role(self):
+        if self.user.is_superuser:
+            return 'Superuser'
         return get_user_role(self.user).__str__(self)
 
     @receiver(post_save, sender=User)
