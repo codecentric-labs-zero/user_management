@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+{% load permission_tags %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/web/users">User management</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="{% if page == 'users' %}active{% endif %}"><a href="users">Users</a></li>
+            <li class="{% if page == 'add_user' %}active{% endif %}"><a href="add_user">Add user</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+                <li><a>{{ user.get_username }} ({{ user }})({{ user|has_role:'lead_recruiter' }})</a></li>
+                <li><a href="/web/logout">logout</a></li>
+            {% else %}
+                <li><a href="/web/login">Log in</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

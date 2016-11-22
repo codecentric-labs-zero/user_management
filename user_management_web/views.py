@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from rolepermissions.shortcuts import assign_role
 from rolepermissions.verifications import has_permission, has_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
+from rolepermissions.shortcuts import available_perm_status, get_user_role
 
 
 @login_required
@@ -37,11 +38,13 @@ def recruiter_page(request):
 @login_required
 @has_permission_decorator('view_recruitment_page')
 def users(request):
-    all_permissions = Permission.objects.all
     result = []
     for user in User.objects.all():
-        result.append((user, Permission.objects.filter(user=user)))
-    return render(request, 'users.html', {'all_permissions': all_permissions, 'result': result})
+        if get_user_role(user) is None:
+            result.append((user, None))
+        else:
+            result.append((user, available_perm_status(user)))
+    return render(request, 'users.html', {'result': result})
 
 
 @login_required

@@ -4,31 +4,33 @@
     <title>User management | Users</title>
 </head>
 <body>
-<a href="/web/logout">logout ({{ user.get_username }})</a>
-<br>
-<a href="/web/add_user">Add user</a>
-<h1>Users listed here</h1>
-<ul>
 
-    {% for user, permissions in result %}
-        <li>
-            {{ user.username }} {% if user.email %}({{ user.email }}) {% endif %}
-            {% if user.is_superuser %}
-                <p>User has all permissions</p>
-            {% else %}
-                {% for permission in all_permissions %}
-                    <div>
-                        {% if permission in permissions %}
-                            <span>☑</span>
-                        {% else %}
-                            <span>☐</span>
-                        {% endif %}
-                        {{ permission }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+{% include 'menu.html' with page='users' %}
+
+<div class="container-fluid">
+    <h1>Users listed here</h1>
+    <ul>
+
+        {% for user, permissions in result %}
+            <li>
+                {{ user.username }} {% if user.email %}({{ user.email }}) {% endif %}
+                {% if user.is_superuser %}
+                    <p>User has all permissions</p>
+                {% else %}
+                    {% for permission, assigned in permissions.items %}
+                        <div>
+                            {% if assigned %}
+                                <span>☑</span>
+                            {% else %}
+                                <span>☐</span>
+                            {% endif %}
+                            {{ permission }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 </body>
 </html>
