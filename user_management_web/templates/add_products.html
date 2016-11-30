@@ -13,11 +13,17 @@
     {% elif user|has_role:'recruiter' %}
         Recruiter
     {% endif %}
-    <br>
-    <a href="users">List users</a><br>
-    <a href="add_user">Add user</a><br><br>
-    <a href="products">List products</a><br>
-    <a href="add_products">Add product</a><br>
+
+    <h1> Add product:</h1>
+
+    <form action="add_products" method="post" id="myForm">
+        {% csrf_token %}
+        <table>
+            {{ productForm }}
+            {{ product_parts_form_set }}
+        </table>
+  <input type="submit" name="submit" value="Submit" class="button">
+    </form>
 
 </h3>
 </body>

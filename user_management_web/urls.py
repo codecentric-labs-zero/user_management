@@ -13,5 +13,8 @@ urlpatterns = [
     url(r'^leadPage', views.lead_page, name='lead_page'),
     url(r'^recruiterPage', views.recruiter_page, name='recruiter_page'),
     url(r'^superUserPage', views.super_user_page, name='super_user_page'),
+    url(r'^products', views.products, name='products'),
+    url(r'^add_products$', views.add_products, name='add_products'),
+
 
 ]
