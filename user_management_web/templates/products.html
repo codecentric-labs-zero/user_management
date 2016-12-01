@@ -17,6 +17,10 @@
     <h1> Will list products here:</h1>
     {% for product in all_products %}
         {{ product.product_name }}
+        <br>Parts:<br>
+        {% for parts in product.product.all %}
+            {{ parts.part_name }}
+        {% endfor %}
     {% endfor %}
 
 </h3>

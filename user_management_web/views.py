@@ -7,7 +7,7 @@ from rolepermissions.shortcuts import assign_role
 from rolepermissions.verifications import has_permission, has_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from rolepermissions.shortcuts import available_perm_status, get_user_role
-from models import ProductAndPartsForm, sparePartsFormSet,Product
+from models import ProductAndPartsForm, sparePartsFormSet, Product
 
 
 @login_required
@@ -86,7 +86,14 @@ def add_products(request):
     return render(request, 'add_products.html',
                   {'productForm': productForm, 'product_parts_form_set': product_parts})
 
+
 @login_required()
 def products(request):
     all_products = Product.objects.all()
+    #for product in all_products:
+      #  print(product.product.all())
+
+        # print(all_product_parts)
+    #all_product_parts = "none"
+    #return render(request, 'products.html', {'all_products': all_products, 'all_product_parts': all_product_parts})
     return render(request, 'products.html', {'all_products': all_products})
