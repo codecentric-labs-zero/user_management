@@ -3,7 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User management | Recruitment Page</title>
+    <title>Add product page</title>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.slim.js"
+            integrity="sha256-5i/mQ300M779N2OVDrl16lbohwXNUdzL/R2aVUXyXWA="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <h1>This page is visible only for recruiters and lead recruiters</h1>
@@ -22,9 +26,49 @@
             {{ productForm }}
             {{ product_parts_form_set }}
         </table>
-  <input type="submit" name="submit" value="Submit" class="button">
+        <input type="submit" name="submit" value="Save" class="button">
+        <input id='addForm' type="button" name="submit" value="Add part" class="button">
+        <input id='removeForm' type="button" name="submit" value="Remove Part" class="button">
     </form>
+    <script type="text/javascript">
+        const formRelatedName = 'product'
+        const anyFormFieldName = 'part_name'
+        const maxNumOfSubForms = $("#id_" + formRelatedName + "-TOTAL_FORMS").val()
 
+        var visiableForms = 0;
+
+
+        console.log("subform number", maxNumOfSubForms)
+        console.log("lets hide all except first one!")
+
+        for (i = 0; i < maxNumOfSubForms; i++) {
+            console.log("Hide parent of form num: ", i)
+            $("#id_" + formRelatedName + "-" + i + "-" + anyFormFieldName).parent().parent().hide()
+        }
+
+        $("#addForm").click(function () {
+
+            if (visiableForms < maxNumOfSubForms) {
+                console.log("Max forms not reached add part form")
+                //show
+                // count up!
+
+                $("#id_" + formRelatedName + "-" + visiableForms + "-" + anyFormFieldName).parent().parent().show()
+                visiableForms++;
+            }
+        });
+        $("#removeForm").click(function () {
+            console.log("button works")
+            console.log("visible forms:", visiableForms)
+            if (visiableForms > 0) {
+                console.log("Min form not reached delete form!")
+                $("#id_" + formRelatedName + "-" + (visiableForms - 1) + "-" + anyFormFieldName).parent().parent().hide()
+                visiableForms--;
+            }
+        });
+
+
+    </script>
 </h3>
 </body>
 </html>

@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>User management | Recruitment Page</title>
 </head>
@@ -14,14 +16,48 @@
         Recruiter
     {% endif %}
 
-    <h1> Will list products here:</h1>
-    {% for product in all_products %}
-        {{ product.product_name }}
-        <br>Parts:<br>
-        {% for parts in product.product.all %}
-            {{ parts.part_name }}
+    <h1> Products:</h1>
+    <table class="table">
+        <tr>
+            <th>Product name</th>
+            <th>Product parts</th>
+        </tr>
+        {% for product in all_products %}
+            <tr>
+            <th>
+                {{ product.product_name }}</th>
+            <th>
+                <table class="table-bordered">
+                    {% for parts in product.product.all %}
+                        <th>
+                            {{ parts.part_name }}
+                        </th>
+                    {% endfor %}
+                </table>
+            </th>
         {% endfor %}
-    {% endfor %}
+        </tr>
+    </table>
+    {% if all_products.has_other_pages %}
+        <ul class="pagination">
+        {% if all_products.has_previous %}
+            <li><a href="?page={{ all_products.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in all_products.paginator.page_range %}
+            {% if all_products.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if all_products.has_next %}
+            <li><a href="?page={{ all_products.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    {% endif %}
 
 </h3>
 </body>
